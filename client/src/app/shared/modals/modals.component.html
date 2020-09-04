@@ -1,0 +1,26 @@
+<!-- <div class="modal-header">
+    <h4 class="modal-title">{{ title }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    {{ message }}
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="decline()">{{ btnCancelText }}</button>
+    <button type="button" class="btn btn-primary" (click)="accept()">{{ btnOkText }}</button>
+</div> -->
+
+<div class="modal-body text-center">
+    <i class="fa fa-exclamation-circle pop-up-close-icon" aria-label="Close" (click)="modalRef.hide()"  style="font-size: 21px;
+    color: crimson;"></i>
+    <i class="fa fa-exclamation-circle alert-icon" *ngIf="title == 'ALERT'" style="font-size: 21px;
+    color: crimson;"></i>
+    <span [innerHTML] = "message" class = "alertContainer" style="
+    margin: 10px;
+"></span>
+    <br /><br clear = "all" />
+    <button type="button" class="btn btn-primary" style="margin: 10px;" (click)="accept()" >{{ btnOkText }}</button>
+    <button type="button" class="btn btn-danger" (click)="decline()" *ngIf="btnCancelText">{{ btnCancelText }}</button>
+</div>

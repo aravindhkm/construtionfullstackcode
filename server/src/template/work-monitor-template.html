@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				font-family: "Times New Roman", Times, serif;
+				font-style: normal;
+				font-size: 14px;
+			}
+			.column {
+				float: left;
+				width: 25%;
+				padding: 10px;
+			}
+			.column1 {
+				float: left;
+				width: 40%;
+				padding: 10px;
+			}
+			.column2 {
+				float: left;
+				width: 100%;
+				padding: 10px;
+			}
+			.row::after {
+				content: "";
+				clear: both;
+				display: table;
+			}
+			.textDesign {
+				text-decoration: underline;
+			}
+		</style>
+		<title>Work Monitoring Report</title>
+		<!-- <link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/> -->
+	</head>
+	<body>
+		<h4
+			style="border-top: 1px solid;border-bottom: 1px solid;text-align: center;padding: 5px;"
+		>
+			WORK MONITORING REPORT
+		</h4>
+		<div>
+			{{#each monitorArray}}
+			<p class="col-sm-12">
+				<label>PROJECT TITLE: </label>
+				<span class="textDesign">
+					{{this.projectTitle}}
+				</span>
+			</p>
+			<p class="col-sm-12">
+				<label>LOCATION: </label
+				><span class="textDesign">{{this.location}}</span>
+			</p>
+			<p class="col-sm-12">
+				<label>BLOCK NAME: </label
+				><span class="textDesign">{{this.blockName}}</span>
+			</p>
+			<p class="col-sm-12">
+				<label>DROP NAME: </label
+				><span class="textDesign">{{this.dropName}}</span>
+			</p>
+			<div class="row" style="border-style: ridge;padding: 5px;">
+				{{#if this.dropValues}} {{#each this.dropValues}}
+				<p
+					class="col-sm-12"
+					style="background: rgb(24, 190, 24);padding: 5px;"
+				>
+					<span class="col-md-12" style="color: #fff;"
+						>{{this.name}}</span
+					>
+				</p>
+				<div class="row">
+					{{#if this.imageName}} {{#each this.imageName}} {{#if
+					@root.firstView}}
+					<div class="column2">
+						<img
+							src="{{@root.imagePath}}{{../this.path}}{{this}}"
+							style="width:100%;"
+						/>
+					</div>
+					{{/if}} {{#if @root.secondView}}
+					<div class="column1">
+						<img
+							src="{{@root.imagePath}}{{../this.path}}{{this}}"
+							style="width:100%;"
+						/>
+					</div>
+					{{/if}} {{#if @root.thirdView}}
+					<div class="column">
+						<img
+							src="{{@root.imagePath}}{{../this.path}}{{this}}"
+							style="width:100%;"
+						/>
+					</div>
+					{{/if}} {{/each}} {{/if}}
+				</div>
+				{{/each}} {{/if}}
+			</div>
+			<br />
+			<div style="page-break-after:always;"></div>
+			{{/each}}
+		</div>
+	</body>
+</html>

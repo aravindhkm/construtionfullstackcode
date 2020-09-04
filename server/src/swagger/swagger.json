@@ -1,0 +1,926 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "Construction App",
+		"version": "2.0",
+		"title": "Construction",
+		"termsOfService": "https://autoparts.com/terms/",
+		"contact": {
+			"email": "team@autoparts.com"
+		},
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"tags": [
+		{
+			"name": "Authentication",
+			"description": "Auth Module"
+		},
+		{
+			"name": "Categories",
+			"description": "Categories Module"
+		},
+		{
+			"name": "Products",
+			"description": "Products Module"
+		},
+		{
+			"name": "Cart",
+			"description": "Cart Routes"
+		},
+		{
+			"name": "wishlist",
+			"description": "wishlist Routes  (requires authentication)"
+		}
+	],
+	"paths": {
+		"/auth/login": {
+			"post": {
+				"summary": "Login Route",
+				"tags": ["Authentication"],
+				"description": "Login route and generate Access Token",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "loginObject",
+						"schema": {
+							"$ref": "#/definitions/loginObject"
+						},
+						"description": "Login Object"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfull Login return User Object & Token"
+					},
+					"401": {
+						"description": "Password Mismatch"
+					},
+					"404": {
+						"description": "User Not Found"
+					}
+				}
+			}
+		},
+		"/auth/register": {
+			"post": {
+				"tags": ["Authentication"],
+				"summary": "register Route",
+				"description": "Login route and generate Access Token",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "userObject",
+						"description": "User Object",
+						"schema": {
+							"$ref": "#/definitions/userObject"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "item created , return token"
+					},
+					"422": {
+						"description": "invalid input"
+					}
+				}
+			}
+		},
+		"/auth/update": {
+			"put": {
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"tags": ["Authentication"],
+				"summary": "Update User ( Requires Authentication ) Bearer Token",
+				"description": "Update User Data , Billing Address , Shipping Address",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "userUpdateObject",
+						"description": "User Object",
+						"schema": {
+							"$ref": "#/definitions/userUpdateObject"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Updated"
+					},
+					"401": {
+						"description": "Unauthorised"
+					}
+				}
+			}
+		},
+		"/auth/user": {
+			"get": {
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"tags": ["Authentication"],
+				"parameters": [
+					{
+						"in": "header",
+						"type": "string",
+						"name": "Authorization",
+						"description": "Authorization Bearer Token ( Bearer $token )"
+					}
+				],
+				"summary": "Get User Data ( Requires Authentication ) Bearer Token",
+				"description": "get current logged in user data",
+				"responses": {
+					"200": {
+						"description": "User Object"
+					},
+					"401": {
+						"description": "Unauthorised"
+					}
+				}
+			}
+		},
+		"/auth/changePassword": {
+			"post": {
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"tags": ["Authentication"],
+				"responses": {
+					"200": {
+						"description": "Successfull change"
+					},
+					"401": {
+						"description": "Unauthorised"
+					},
+					"422": {
+						"description": "missing parameters"
+					}
+				},
+				"parameters": [
+					{
+						"in": "header",
+						"type": "string",
+						"name": "Authorization",
+						"description": "Authorization Bearer Token ( Bearer $token )"
+					},
+					{
+						"in": "body",
+						"name": "Request Password reset Object",
+						"description": "Request Password Reset Object",
+						"schema": {
+							"required": [
+								"password",
+								"new_password",
+								"new_password_confirmation"
+							],
+							"properties": {
+								"password": {
+									"type": "string"
+								},
+								"new_password": {
+									"type": "string"
+								},
+								"new_password_confirmation": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"/auth/uploadImage": {
+			"post": {
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"tags": ["Authentication"],
+				"summary": "Uploads an avatar.",
+				"consumes": ["multipart/form-data"],
+				"parameters": [
+					{
+						"in": "formData",
+						"name": "avatar",
+						"type": "file",
+						"description": "The file to upload"
+					}
+				],
+				"description": "Upload Avatar For current user",
+				"responses": {
+					"200": {
+						"description": "User Object"
+					},
+					"401": {
+						"description": "Unauthorised"
+					}
+				}
+			}
+		},
+		"/auth/logout": {
+			"get": {
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"tags": ["Authentication"],
+				"summary": "Logout ( Requires Authentication ) Bearer Token",
+				"description": "Revoke Access Token",
+				"parameters": [
+					{
+						"in": "header",
+						"type": "string",
+						"name": "Authorization",
+						"description": "Authorization Bearer Token ( Bearer $token )"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Succsessful Log Out"
+					},
+					"401": {
+						"description": "Unauthorised"
+					}
+				}
+			}
+		},
+		"/auth/forgot": {
+			"post": {
+				"tags": ["Authentication"],
+				"summary": "Request For Reset Password Email",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "Request Password reset Object",
+						"description": "Request Password Reset Object",
+						"schema": {
+							"required": ["email"],
+							"properties": {
+								"email": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Email has been sent"
+					},
+					"404": {
+						"description": "No account found with this email"
+					}
+				}
+			}
+		},
+		"/auth/reset": {
+			"post": {
+				"tags": ["Authentication"],
+				"summary": "Reset Password",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "passResetObject",
+						"description": "Password Reset Object",
+						"schema": {
+							"required": [
+								"email",
+								"password",
+								"password_confirmation",
+								"token"
+							],
+							"properties": {
+								"email": {
+									"type": "string"
+								},
+								"password": {
+									"type": "string"
+								},
+								"password_confirmation": {
+									"type": "string"
+								},
+								"token": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User Object"
+					},
+					"404": {
+						"description": "Invalid token || wrong email"
+					}
+				}
+			}
+		},
+		"/categories": {
+			"get": {
+				"tags": ["Categories"],
+				"summary": "All Categories List",
+				"responses": {
+					"200": {
+						"description": "returns Categories Object"
+					}
+				}
+			}
+		},
+		"/categories/add": {
+			"post": {
+				"tags": ["AdminOnly"],
+				"summary": "Create Categories",
+				"description": "Create New Category",
+				"parameters": [
+					{
+						"in": "body",
+						"name": "category",
+						"schema": {
+							"type": "object",
+							"required": [
+								"name_en",
+								"name_er",
+								"parent_id",
+								"status"
+							],
+							"properties": {
+								"name_en": {
+									"type": "string"
+								},
+								"name_ar": {
+									"type": "string"
+								},
+								"parent_id": {
+									"type": "integer"
+								},
+								"status": {
+									"type": "boolean"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "OK | category Object"
+					},
+					"422": {
+						"description": "category already created"
+					}
+				}
+			}
+		},
+		"/categories/show/{slug}": {
+			"get": {
+				"tags": ["Categories"],
+				"summary": "Get a category by slug",
+				"responses": {
+					"200": {
+						"description": "returns Category Object"
+					},
+					"404": {
+						"description": "category not found"
+					}
+				},
+				"parameters": [
+					{
+						"in": "path",
+						"name": "slug",
+						"type": "string",
+						"required": true,
+						"description": "Numeric ID of the user to get"
+					}
+				]
+			}
+		},
+		"/products": {
+			"get": {
+				"tags": ["Products"],
+				"summary": "Get Products By Filter",
+				"responses": {
+					"200": {
+						"description": "list Products With pagination all parameters are optional"
+					}
+				},
+				"parameters": [
+					{
+						"in": "path",
+						"name": "category_id",
+						"type": "integer",
+						"required": true
+					},
+					{
+						"in": "path",
+						"name": "inStock",
+						"required": true,
+						"type": "boolean"
+					},
+					{
+						"in": "path",
+						"name": "taxable",
+						"required": true,
+						"type": "boolean"
+					},
+					{
+						"in": "path",
+						"name": "featured",
+						"required": true,
+						"type": "boolean"
+					},
+					{
+						"in": "path",
+						"name": "min_price",
+						"required": true,
+						"type": "number"
+					},
+					{
+						"in": "path",
+						"name": "max_price",
+						"required": true,
+						"type": "number"
+					},
+					{
+						"in": "path",
+						"name": "order_by",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "sort",
+						"required": true,
+						"type": "string",
+						"description": "desc or asc"
+					},
+					{
+						"in": "path",
+						"name": "page",
+						"required": true,
+						"type": "number",
+						"description": "Page Number"
+					},
+					{
+						"in": "path",
+						"name": "count",
+						"required": true,
+						"type": "number",
+						"description": "count per page"
+					}
+				]
+			}
+		},
+		"/cart": {
+			"get": {
+				"tags": ["Cart"],
+				"summary": "Get Current Session Cart",
+				"responses": {
+					"200": {
+						"description": "list all cart data returns empty array if no items"
+					}
+				}
+			}
+		},
+		"/cart/addItem": {
+			"post": {
+				"tags": ["Cart"],
+				"summary": "Add Item to current session cart",
+				"responses": {
+					"200": {
+						"description": "list all cart data returns empty array if no items"
+					}
+				},
+				"parameters": [
+					{
+						"in": "body",
+						"name": "Item",
+						"schema": {
+							"type": "object",
+							"required": ["product_id", "quantity"],
+							"properties": {
+								"product_id": {
+									"type": "number"
+								},
+								"quantity": {
+									"type": "number"
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"/cart/update": {
+			"post": {
+				"tags": ["Cart"],
+				"summary": "Update Item Quantity",
+				"responses": {
+					"200": {
+						"description": "list all cart data returns empty array if no items"
+					}
+				},
+				"parameters": [
+					{
+						"in": "body",
+						"name": "Item",
+						"schema": {
+							"type": "object",
+							"required": ["row_id", "quantity"],
+							"properties": {
+								"row_id": {
+									"type": "number"
+								},
+								"quantity": {
+									"type": "number"
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"/cart/addCoupon": {
+			"post": {
+				"tags": ["Cart"],
+				"summary": "Add Coupon Code to Cart",
+				"responses": {
+					"200": {
+						"description": "Ok with Localized message"
+					},
+					"401": {
+						"description": "code is inactive or depleted localized message"
+					},
+					"404": {
+						"description": "code is invalid with Localized message"
+					}
+				},
+				"parameters": [
+					{
+						"in": "body",
+						"name": "Item",
+						"schema": {
+							"type": "object",
+							"required": ["code"],
+							"properties": {
+								"code": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"/cart/removeCoupon": {
+			"post": {
+				"tags": ["Cart"],
+				"summary": "remove Coupon Code from Cart",
+				"responses": {
+					"200": {
+						"description": "Ok with Localized message"
+					}
+				},
+				"parameters": [
+					{
+						"in": "body",
+						"name": "Item",
+						"schema": {
+							"type": "object",
+							"required": ["code"],
+							"properties": {
+								"code": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"/cart/removeItem": {
+			"post": {
+				"tags": ["Cart"],
+				"summary": "delete cart item",
+				"responses": {
+					"200": {
+						"description": "list all cart data returns empty array if no items"
+					}
+				},
+				"parameters": [
+					{
+						"in": "body",
+						"name": "Item",
+						"schema": {
+							"type": "object",
+							"required": ["row_id"],
+							"properties": {
+								"row_id": {
+									"type": "number"
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"/cart/clear": {
+			"get": {
+				"tags": ["Cart"],
+				"summary": "Clear Current Session Cart",
+				"responses": {
+					"200": {
+						"description": "list all cart data returns empty array if no items"
+					}
+				}
+			}
+		},
+		"/wishlist": {
+			"get": {
+				"tags": ["wishlist"],
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"summary": "Get Current Session Cart",
+				"responses": {
+					"200": {
+						"description": "list all cart data returns empty array if no items"
+					}
+				}
+			}
+		},
+		"/wishlist/addItem": {
+			"post": {
+				"tags": ["wishlist"],
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"summary": "Add Item to current session cart",
+				"responses": {
+					"200": {
+						"description": "list all cart data returns empty array if no items"
+					}
+				},
+				"parameters": [
+					{
+						"in": "body",
+						"name": "Item",
+						"schema": {
+							"type": "object",
+							"required": ["product_id"],
+							"properties": {
+								"product_id": {
+									"type": "number"
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"/wishlist/removeItem": {
+			"post": {
+				"tags": ["wishlist"],
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"summary": "delete cart item",
+				"responses": {
+					"200": {
+						"description": "list all cart data returns empty array if no items"
+					}
+				},
+				"parameters": [
+					{
+						"in": "body",
+						"name": "Item",
+						"schema": {
+							"type": "object",
+							"required": ["row_id"],
+							"properties": {
+								"row_id": {
+									"type": "number"
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"/wishlist/clear": {
+			"get": {
+				"tags": ["wishlist"],
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"summary": "Clear Current Session Cart",
+				"responses": {
+					"200": {
+						"description": "list all cart data returns empty array if no items"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"loginObject": {
+			"type": "object",
+			"required": ["email", "password"],
+			"properties": {
+				"email": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				}
+			}
+		},
+		"billingObject": {
+			"type": "object",
+			"required": [
+				"first_name",
+				"last_name",
+				"email",
+				"phone",
+				"company",
+				"address_1",
+				"city",
+				"country",
+				"state",
+				"postcode"
+			],
+			"properties": {
+				"first_name": {
+					"type": "string"
+				},
+				"last_name": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				},
+				"phone": {
+					"type": "string"
+				},
+				"company": {
+					"type": "string"
+				},
+				"address_1": {
+					"type": "string"
+				},
+				"address_2": {
+					"type": "string"
+				},
+				"city": {
+					"type": "string"
+				},
+				"country": {
+					"type": "string"
+				},
+				"state": {
+					"type": "string"
+				},
+				"postcode": {
+					"type": "integer"
+				}
+			}
+		},
+		"shippingObject": {
+			"type": "object",
+			"required": [
+				"first_name",
+				"last_name",
+				"company",
+				"address_1",
+				"city",
+				"phone",
+				"country",
+				"state",
+				"postcode"
+			],
+			"properties": {
+				"first_name": {
+					"type": "string"
+				},
+				"last_name": {
+					"type": "string"
+				},
+				"company": {
+					"type": "string"
+				},
+				"address_1": {
+					"type": "string"
+				},
+				"address_2": {
+					"type": "string"
+				},
+				"city": {
+					"type": "string"
+				},
+				"phone": {
+					"type": "string"
+				},
+				"country": {
+					"type": "string"
+				},
+				"state": {
+					"type": "string"
+				},
+				"postcode": {
+					"type": "integer"
+				}
+			}
+		},
+		"userUpdateObject": {
+			"type": "object",
+			"required": ["name", "email"],
+			"properties": {
+				"name": {
+					"type": "string",
+					"example": "Name"
+				},
+				"email": {
+					"type": "string",
+					"example": "mail@example.com"
+				},
+				"billing": {
+					"$ref": "#/definitions/billingObject"
+				},
+				"shipping": {
+					"$ref": "#/definitions/shippingObject"
+				}
+			}
+		},
+		"userObject": {
+			"type": "object",
+			"required": ["name", "password", "email", "password_confirmation"],
+			"properties": {
+				"name": {
+					"type": "string",
+					"example": "Name"
+				},
+				"email": {
+					"type": "string",
+					"example": "mail@example.com"
+				},
+				"password": {
+					"type": "string",
+					"example": "password",
+					"description": "plain text password"
+				},
+				"password_confirmation": {
+					"type": "string",
+					"example": "password",
+					"description": "password Confirmation"
+				},
+				"billing": {
+					"$ref": "#/definitions/billingObject"
+				},
+				"shipping": {
+					"$ref": "#/definitions/shippingObject"
+				}
+			}
+		}
+	},
+	"securityDefinitions": {
+		"ApiKeyAuth": {
+			"type": "apiKey",
+			"in": "header",
+			"name": "Authorization"
+		},
+		"Localization": {
+			"type": "apiKey",
+			"in": "header",
+			"name": "X-localization",
+			"description": "All requests must include the `X-localization` header containing your language ( en, ar )."
+		}
+	},
+	"host": "localhost:5000",
+	"basePath": "/api/v1.0/",
+	"schemes": ["http", "https"]
+}

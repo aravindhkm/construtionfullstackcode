@@ -1,0 +1,73 @@
+<div class="main-section col-md-12 p-0">
+    <div class='card'>
+        <div class="card-header pb-0 border-bottom">
+            <h3 *ngIf='!id'
+                class="">Create Work Monitor</h3>
+            <h3 *ngIf='id'
+                class="">Edit Work Monitor</h3>
+        </div>
+        <div class='card-body'>
+            <div class="breadcrumb-section col-md-12">
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/work-monitor/add">Block-1</a></li>
+                    <li class="breadcrumb-item"><a href="/work-monitor/drop">Drop-1</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Types-image</li>
+                    </ol>
+                    </nav>
+            </div>
+            <form role='form'
+                  [formGroup]='createImageMonitorForm'
+                  class="common-form col-md-12">
+               
+                
+                <div class="upload-section file-upload-section">
+                    <div class='form-group'>
+                        <label>Image</label>
+                        <div class="image-upload-sec multi-image-sec col-md-12">
+                                         <div class='row m-0 multi-box'>
+                                            <div *ngFor='let url of imagePreviewUrl let i=index'
+                                                 class='mt-2'>
+                                                <div class="img-box">
+                                                    <img [src]="url" lightbox [simpleMode]="true" height="100px" width="100px"/>
+                                                    <button (click)="removeImage($event,i)"
+                                                            class="remove-img">
+                                                        <i class='fa fa-window-close'></i> 
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                            <label class="custom-file d-flex justify-content-center">
+                                <input type='file'
+                                       class=''
+                                       (change)="fileProgress($event)"
+                                       accept="image/*"
+                                       multiple
+                                       required>
+                                <span class="file-custom btn btn-secondary">Upload Image</span>
+                            </label>
+                        </div>
+                       
+                        <div *ngIf="submitted && !imagePreviewUrl"
+                             class="required-text">Image is
+                            required</div> 
+                    </div>
+                </div>
+                
+
+
+                
+            </form>
+            <div class='bottom-section text-right'>
+                <button class='btn btn-default mr-2'
+                        (click)='listPath()'>back</button>
+                <button class='btn btn-primary'
+                        (click)='onSubmit()'>save</button>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+

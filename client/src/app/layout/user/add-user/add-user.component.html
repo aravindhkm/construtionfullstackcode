@@ -1,0 +1,97 @@
+<div class="main-section col-md-12 p-0 user-add">
+    <div class='card'>
+        <div class="card-header pb-0 border-bottom">
+            <!-- <h3 *ngIf='staffRoute && !id'>Add Staff</h3> -->
+            <h3 *ngIf='staffType == "staff" && !id'>Add Staff</h3>
+            <h3 *ngIf='staffType == "contractor" && !id'>Add Contractor</h3>
+            <h3 *ngIf='staffType == "manager" && !id'>Add Manager</h3>
+            <!-- <h3 *ngIf='!staffRoute && !id'
+                class="">Add Contractor</h3> -->
+            <h3 *ngIf='staffType == "staff" && id' class="">Edit Staff</h3>
+            <h3 *ngIf='staffType == "contractor" && id' class="">Edit Contractor</h3>
+            <h3 *ngIf='staffType == "manager" && id' class="">Edit Manager</h3>
+
+        </div>
+        <div class="card-body">
+            <form role='form' [formGroup]='createUserForm' class='common-form col-md-12 p-0'>
+                <div class="row">
+                    <div class='form-group col-md-6'>
+                        <label> Name </label>
+                        <input type='text' class='form-control' formControlName='firstName' (keypress)="restrictSpace($event)" placeholder="Enter Name" required>
+                        <div *ngIf="submitted && f.firstName.errors && f.firstName.errors.required" class="required-text"> Name is required </div>
+                    </div>
+                    <div class='form-group col-md-6'>
+                        <label>User Name </label>
+                        <input type='text' class='form-control' formControlName='userName' (keypress)="restrictSpace($event)" oninput="this.value = this.value.replace(/[^a-z.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="Enter User Name" required>
+                        <div *ngIf="submitted && f.userName.errors && f.userName.errors.required" class="required-text">User Name is required </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='form-group col-md-6'>
+                        <label>Phone number </label>
+                        <input type='text' class='form-control' formControlName='phoneNumber' placeholder="Enter Phone Number" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+                        <div *ngIf="submitted && f.phoneNumber.errors && f.phoneNumber.errors.required" class="required-text">Phone Number is required </div>
+                    </div>
+                    <div class='form-group col-md-6'>
+                        <label>Email </label>
+                        <input type='text' class='form-control' formControlName='email' (keypress)="restrictSpace($event)" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="Enter Email">
+                        <div *ngIf="submitted && f.email.errors && f.email.errors.required" class="required-text">Email is required </div>
+                        <div *ngIf="submitted && f.email.errors && f.email.errors.pattern" class="required-text">
+                            Email is invalid
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='form-group col-md-6'>
+                        <label>Password</label>
+                        <input type='password' class='form-control' formControlName='password' (keypress)="restrictSpace($event)" placeholder="Enter Password" minlength="6" required>
+                        <div *ngIf="submitted && f.password.errors && f.password.errors.required" class="required-text">
+                            Password is required</div>
+                        <div class="required-text" *ngIf="submitted && f.password.errors?.minlength"> Password must be minimum six characters
+                        </div>
+                    </div>
+                    <div class='form-group col-md-6'>
+                        <label>Company Name </label>
+                        <input type='text' class='form-control' formControlName='companyName' (keypress)="restrictSpace($event)" placeholder="Enter Company Name" required>
+                        <div *ngIf="submitted && f.companyName.errors && f.companyName.errors.required" class="required-text"> Company Name is required </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class='form-group col-md-6'>
+                        <label>Address</label>
+                        <textarea type='text' class='form-control' formControlName='address' (keypress)="restrictSpace($event)" placeholder="Enter Address" required></textarea>
+                        <div *ngIf="submitted && f.address.errors && f.address.errors.required" class="required-text">
+                            Address is required</div>
+                    </div>
+                    <div class='form-group col-md-6'>
+                        <label>Image</label>
+                        <div class="image-upload-sec">
+                            <div class="img-prev">
+                                <span *ngIf="!imagePreviewUrl"> <i class="fa fa-picture-o icon-lg"></i></span>
+                                <span *ngIf="imagePreviewUrl"><img [src]="imagePreviewUrl"
+                                         height="95"
+                                         width="120"></span>
+                            </div>
+                            <!-- <span *ngIf="!imagePreviewUrl"> <i class="fa fa-cloud-upload icon-lg"></i></span>
+                            <span *ngIf="imagePreviewUrl"><img [src]="imagePreviewUrl" height="95" width="120"></span>
+                        </div>                                                                                                  -->
+                            <label class="custom-file">
+                                <input type='file'
+                                       class=''
+                                       (change)="fileProgress($event)"
+                                       accept="image/*"
+                                       required>
+                                <span class="file-custom btn btn-secondary">Upload Image</span>
+                            </label>
+                        </div>
+                        <div *ngIf="submitted && (!f.images.value && this.fileData == null)" class="required-text">Image is required </div>
+                    </div>
+                </div>
+            </form>
+            <div class='buttom-section text-right'>
+                <button class='btn btn-default mr-2' (click)='listPath()'>Cancel</button>
+                <button class='btn btn-primary' (click)='onSubmit()'>Save</button>
+            </div>
+        </div>
+    </div>
+</div>

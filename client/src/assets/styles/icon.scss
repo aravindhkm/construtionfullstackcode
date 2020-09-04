@@ -1,0 +1,88 @@
+$icon-font-sm:15px;
+$icon-font-md:20px;
+// $icon-path: url(../assets/images/icons.svg);
+$icon-width:20px;
+$icon-height:20px;
+$icon-size:490px 4210px;
+$i-position: -60px;
+
+// .side-bar-icon{
+ 
+//     width: $icon-width;
+//     height: $icon-height;
+//     background-image: $icon-path;
+//     display: block;
+//     background-size: $icon-size;
+//     cursor: pointer;
+//     background-repeat: repeat;
+
+// }
+
+
+.icon{
+    padding: 5px 6px;
+    border: none;
+    border-radius: 3px;
+    color:$light-text;
+    background-color: transparent;
+    i{
+      font-size: 16px;
+    }
+  }
+.icon-prim{
+    background-color: $primary-bg;
+    border:none;
+    i{
+      color:$light-text;
+    }
+    &:hover, &:focus{
+      background-color: $sec-btn;
+    }
+  }
+  
+  .icon-dele{
+    border:1px solid $danger-pink-bor;
+    color: $pink;
+    &:hover{
+        background-color: $danger-pink;
+        color: $light-text;
+    }
+    
+  }
+  .icon-edit{
+    border:1px solid $dark-blue-bor;
+    color: $dark-blue;
+    &:hover{
+        background-color: $dark-blue;
+        color: $light-text;
+    }
+    margin-right: 5px;
+  }
+  .icon-lg{
+    font-size: 48px;
+    color: #9d9d9d;
+  }
+  .icon-close{
+    padding: 0;
+    i{
+      color: $red;
+      font-size: 20px;
+    }
+   
+  }
+  .download-sec{
+    i{
+      color: $blue-btn;
+      font-size: 20px;
+    }
+  }
+// .folder-box{
+  //   button{
+  //     background: transparent;
+  //     border: none;
+  //     i{
+  //       font-size: 40px;
+  //       color: $folder-icon;
+  //     }
+  //   }
+  // }

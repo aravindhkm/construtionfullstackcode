@@ -1,0 +1,37 @@
+
+.switch{
+    &.switch-large{
+      height: 22px;
+   border-radius: 40px;
+      .switch-pane{
+        span{
+          line-height: 22px;
+          font-size: 14px;
+        }
+        .switch-label-unchecked {
+            padding-left: 25px;
+            padding-right: 22px;
+          }
+        .switch-label-checked{
+          padding-right: 42px;
+   padding-left: 20px;
+        }
+      }
+      small {
+          width: 22px;
+          height: 22px;
+          right: calc(100% - 22px);
+        }
+        
+    }
+    &.checked{
+    //   background: $primary-bg;
+      color: #fff;
+     small {
+      right: 0;
+      left: auto;
+  }
+    }
+  
+  }
+  

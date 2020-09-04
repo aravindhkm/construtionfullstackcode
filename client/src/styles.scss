@@ -1,0 +1,192 @@
+// /* You can add global styles to this file, and also import other style files */
+// // @import "node_modules/ngx-toastr/toastr.css";
+// @import "../node_modules/bootstrap/scss/functions";
+// @import "../node_modules/bootstrap/scss/variables";
+// @import './assets/styles/variables';
+// @import "../node_modules/compass-mixins/lib/compass";
+// @import "../node_modules/compass-mixins/lib/animate";
+// @import "../node_modules/bootstrap/scss/bootstrap";
+// @import "../node_modules/@mdi/font/scss/materialdesignicons";
+// @import "../node_modules/font-awesome/scss/font-awesome";
+// @import "./assets/styles/fonts";
+// @import "./assets/styles/functions";
+// @import "./assets/styles/mixins/background";
+// @import "./assets/styles/mixins/animation";
+// @import "./assets/styles/mixins/badges";
+// @import "./assets/styles/mixins/breadcrumbs";
+// @import "./assets/styles/mixins/pagination";
+// @import "./assets/styles/mixins/buttons";
+// @import "./assets/styles/mixins/misc";
+// @import "./assets/styles/mixins/color-functions";
+// @import "./assets/styles/mixins/cards";
+// @import "./assets/styles/mixins/tooltips";
+// @import "./assets/styles/mixins/popovers";
+// @import "./assets/styles/mixins/blockqoute";
+// @import "./assets/styles/accordions";
+// @import "./assets/styles/breadcrumbs";
+// @import "./assets/styles/forms";
+// @import "./assets/styles/icons";
+// @import "./assets/styles/tables";
+// @import "./assets/styles/buttons";
+// @import "./assets/styles/badges";
+// @import "./assets/styles/cards";
+// @import "./assets/styles/typography";
+// @import "./assets/styles/preview";
+// @import "./assets/styles/lists";
+// @import "./assets/styles/bootstrap-progress";
+// @import "./assets/styles/bootstrap-alerts";
+// @import "./assets/styles/tabs";
+// @import "./assets/styles/dropdowns";
+// @import "./assets/styles/pagination";
+// @import "./assets/styles/popovers";
+// @import "./assets/styles/modals";
+// @import "./assets/styles/nav";
+// @import "./assets/styles/reset";
+// @import "./assets/styles/rating";
+// @import "./assets/styles/layouts";
+// @import "./assets/styles/tooltips";
+// @import "./assets/styles/responsive";
+// @import "./assets/styles/misc";
+// @import "./assets/styles/utilities";
+// @import "./assets/styles/demo";
+// @import "./assets/styles/navbar";
+// @import "./assets/styles/variable";
+// @import "./assets/styles/button";
+// @import "./assets//styles/icon";
+// @import "./assets/styles/app";
+
+
+// /* You can add global styles to this file, and also import other style files */
+
+// /* Common-Code */
+
+// // ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+// //   color: $place-holder-text !important;
+// // }
+// // ::-moz-placeholder { /* Firefox 19+ */
+// //   color: $place-holder-text !important;
+// // }
+// // :-ms-input-placeholder { /* IE 10+ */
+// //   color: $place-holder-text !important;
+// // }
+// // :-moz-placeholder { /* Firefox 18- */
+// //   color: $place-holder-text !important;
+// // }
+
+// // body,.sidebar{
+// //   font-family: 'Roboto', sans-serif;
+// //   font-size: 14px;
+// // }
+// // p,a,span{
+// //   font-size: 14px;
+// // }
+
+// // h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+// //   line-height: 45px;
+// // }
+// // .page-body-wrapper{
+// //   padding: 0;
+// // }
+// // .content-wrapper{
+// //   padding-top: 95px;
+// // }
+// // .main-panel-only{
+// //   width: calc(100%);
+// //   .content-wrapper{
+// //       padding: 0;
+// //   }
+// // }
+
+// // /*************** Login Page ***************/
+// // .auth-form-light{
+// //   width: 400px;
+// //   background-color: rgba(255, 255, 255, 0.96);
+// //   border-radius: 10px;
+// //   max-height: 500px;
+// //   box-shadow: 2px 1px 4px 3px rgba(0, 0, 0, 0.38);
+// //   .form-group {
+// //       margin-bottom: 1.5rem;
+// //   }
+
+// }
+// .brand-logo{
+//   text-align: center;
+//   a {
+//     width: 110px;
+//     display: block;
+//     margin: 0 auto;
+//     img{
+//       width: 100%;
+//       height: auto;
+//     }
+//   }
+// } 
+// .form-control{
+//   height: 35px;
+//   border-color: $form-control-bor;
+//   font-size: 13px;
+// }
+// .navbar{
+//   background: $gradient;
+// }
+// // }
+// // .brand-logo{
+// //   text-align: center;
+// //   a {
+// //     width: 110px;
+// //     display: block;
+// //     margin: 0 auto;
+// //     img{
+// //       width: 100%;
+// //       height: auto;
+// //     }
+// //   }
+// // } 
+// // .form-control{
+// //   height: 38px;
+// //   border-color: $form-control-bor;
+// // }
+// // .navbar{
+// //   background: $gradient;
+// // }
+
+
+// // .sidebar-icon-only{
+// //   .main-panel{
+// //     width: 100%;
+// //   }
+
+  
+// // }
+// // @media screen and (min-width: 992px){
+// //   .sidebar-icon-only{
+// //   .sidebar{
+// //     nav{
+// //       .nav-item{
+// //         .nav-link{
+// //           padding: 16px 25px !important;
+// //         }
+// //       }
+// //     }
+// //   }
+// // }
+// // }
+
+
+// // .bg-primary{
+// //   background-color: $primary-bg !important;
+// // }
+
+
+// // .card-header{
+// //   background: none;
+// //   border: none;
+// //   padding: 1rem 1.25rem;
+// // }
+// // .page-link{color: $light-green-txt;}
+// // .pagination .page-item.active .page-link, .pagination .page-item:hover .page-link, 
+// // .pagination .page-item:focus .page-link, .pagination .page-item:active .page-link{
+// //   background: $primary-bg;
+// //   border-color:$primary-bg;
+// // }
+

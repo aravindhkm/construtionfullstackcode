@@ -1,0 +1,16 @@
+<div class="container-scroller">
+  <app-navbar *ngIf="showNavbar"></app-navbar>
+  <div class="container-fluid page-body-wrapper">
+    <app-sidebar *ngIf="showSidebar" class="app-side-bar m-0"></app-sidebar>
+    <div class="main-panel" [ngClass]="{ 'main-panel-only' : !showSidebar }">
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+        <ng-http-loader spinner='sk-wave' [opacity]=".7"></ng-http-loader>
+      </div>
+      <!-- <div contentAnimate *ngIf="!isLoading" class="h-100"> -->
+      <!-- <app-footer></app-footer> -->
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+ 

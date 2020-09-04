@@ -1,0 +1,61 @@
+<div class="main-section col-md-12 p-0 user-add">
+    <div class='card'>
+        <div class="card-header pb-0 border-bottom">
+            <h3>Add Role</h3>
+        </div>
+        <div class="card-body">
+            <!-- <form role='form'
+                  [formGroup]='createRoleForm'
+                  class='common-form col-md-12 p-0'> -->
+            <div class="row">
+                <div class='form-group col-md-12'>
+                    <label> Name </label>
+                    <input type='text' class='form-control' placeholder="Enter Name" required>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class='form-group col-md-12'>
+
+                    <label>Permissons </label>
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+
+                            <thead>
+                                <tr>
+                                    <th>Modules</th>
+                                    <th>Read</th>
+                                    <th>Write</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor='let data of moduleArray;let i= index'>
+                                    <td>
+                                        {{data.name}}
+                                    </td>
+                                    <td>
+                                        <input type='checkbox' [(ngModel)]='data.write' />
+                                    </td>
+                                    <td>
+                                        <input type='checkbox' />
+                                    </td>
+                                    <td>
+                                        <input type='checkbox' />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <!-- </form> -->
+            <div class='buttom-section text-right'>
+                <button (click)="listPath()" class='btn btn-default mr-2'>Cancel</button>
+                <button (click)="onSubmit()" class='btn btn-primary'>Save</button>
+            </div>
+        </div>
+    </div>
+</div>

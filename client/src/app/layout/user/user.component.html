@@ -1,0 +1,99 @@
+<div class="row m-0 common-page stretch-card">
+    <div class="main-section col-md-12 p-0">
+        <div class="card">
+            <div class="card-header row m-0">
+                <div class="col-md-4 page-header pr-0">
+                    <!-- <h3 class="page-title" *ngIf='staffRoute'>Staff List</h3>
+                    <h3 class="page-title" *ngIf='!staffRoute'>Contractor List</h3> -->
+                    <h3 class="page-title" *ngIf='staffType == "staff"'>Staff List</h3>
+                    <h3 class="page-title" *ngIf='staffType == "contractor"'>Contractor List</h3>
+                    <h3 class="page-title" *ngIf='staffType == "manager"'>Manager List</h3>
+                </div>
+
+                <div class="d-flex flex-row justify-content-end align-items-center col-md-8 pl-0 right-top-hd">
+                    <form #searchForm='ngForm' (ngSubmit)='submit(searchForm.value)' class="common-form">
+                        <div class="form-group mr-2 mt-3">
+                            <div class="input-group">
+                                <input class="form-control search-box" type='text' [(ngModel)]="search" name='search' placeholder="search">
+                                <button class="input-group-addon icon-prim" type='submit'>
+                  <i class="fa fa-search"></i>
+                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <button class='btn btn-primary mr-2 reset-icon' type='button' (click)='onReset()'><i class="fa fa-refresh m-0"></i></button>
+                    <button type='button' class="btn btn-primary mr-2 btn-add" *ngIf='staffType == "staff"' (click)='addPath("staff")'><i class="fa fa-plus"></i>Add Staff</button>
+                    <button type='button' class="btn btn-primary mr-2 btn-add" *ngIf='staffType == "contractor"' (click)='addPath("contractor")'><i class="fa fa-plus"></i>Add Contractor</button>
+                    <button type='button' class="btn btn-primary mr-2 btn-add" *ngIf='staffType == "manager"' (click)='addPath("manager")'><i class="fa fa-plus"></i>Add Manager</button>
+
+                    <button class="btn btn-primary btn-export" (click)='download()'><i class="fa fa-arrow-down"></i>Export </button>
+                </div>
+            </div>
+
+            <div class="card-body pt-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="xs-sec text-center"> S.No</th>
+                                <th> Name </th>
+                                <th> Email</th>
+                                <th> Mobile </th>
+                                <!-- <th> Address </th> -->
+                                <th class="sm-sec text-center">Image</th>
+                                <th class="sm-sec text-center"> Status </th>
+                                <th class="sm-sec text-center"> Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf='listData.length != 0'>
+                            <tr *ngFor='let i=index let data of listData| paginate:{itemsPerPage: itemsPerPage, currentPage: page,totalItems:collection}'>
+                                <td class="text-center">{{(page - 1 ) * itemsPerPage + i + 1}}</td>
+                                <td>{{data.firstName}}</td>
+                                <td>{{data.email}}</td>
+                                <td>{{data.mobile}}</td>
+                                <!-- <td>{{data.address ? data.address : '-'}}</td> -->
+                                <td class="text-center"><img src="{{imagePath + data.imageName}}" /></td>
+                                <td class="text-center">
+                                    <!-- <select (change)='updateStatus($event,data.id)'> -->
+                                    <!-- <option *ngFor='let item of statusItem' value={{item.id}} [selected]="data.status == item.id" >{{item.name}}</option> -->
+                                    <!-- <option [selected]="data.status == true" value="true">Active</option>
+                    <option [selected]="data.status == false" value="false">InActive</option>
+                  </select> -->
+
+                                    <ui-switch uncheckedLabel="In Active" defaultBgColor="#FF0000" checkedLabel="Active" size="medium" (valueChange)="updateStatus($event,data.id)" [checked]="data.status"></ui-switch>
+
+                                    <!-- <select (change)="onChange($event.target.value)" [ngStyle]="{'color':selectedColor}">
+                    <option *ngFor="let color of colors" [value]="color.value" [ngStyle]="{'color':color.value}">gfgf</option>
+                </select> -->
+
+                                </td>
+                                <td class="action-box text-center">
+                                    <!-- <div class="tooltips"> -->
+                                    <button class="icon icon-edit" (click)='viewPath(data.id)' placement="bottom" ngbTooltip="Edit"> 
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                                    <!-- <span class="tooltip-text">Edit</span> -->
+                                    <!-- </div> -->
+                                    <!-- <div class="tooltips"> -->
+                                    <button class="icon icon-dele" (click)='delete(data.id)' placement="bottom" ngbTooltip="Delete"> 
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                                    <!-- <span class="tooltip-text">Delete</span> -->
+                                    <!-- </div> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf='listData.length == 0'>
+                            <tr>
+                                <td colspan="8" class="font-weight-medium text-center">No data Found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="listData.length > 0" class='ml-auto mt-3'>
+        <pagination-controls (pageChange)="onChange($event)" previousLabel="" nextLabel=""> </pagination-controls>
+    </div>
+</div>

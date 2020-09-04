@@ -1,0 +1,188 @@
+{
+	"Users": [
+		{
+			"firstName": "Super",
+			"lastName": "Admin",
+			"userName": "superadmin",
+			"email": "superadmin@mail.com",
+			"password": "super@12345",
+			"countryCode": "+91",
+			"mobile": "9876543232",
+			"role": "superadmin"
+		},
+		{
+			"firstName": "Admin",
+			"lastName": "Admin",
+			"userName": "admin",
+			"email": "admin@mail.com",
+			"password": "admin@12345",
+			"countryCode": "+91",
+			"mobile": "9876543233",
+			"role": "admin"
+		},
+		{
+			"firstName": "Admin",
+			"lastName": "Admin",
+			"userName": "nasar",
+			"email": "nasar.k@greatinnovus.com",
+			"password": "admin@12345",
+			"countryCode": "+91",
+			"mobile": "9876543222",
+			"role": "admin"
+		},
+		{
+			"firstName": "Aravindh",
+			"lastName": "Aravindh",
+			"userName": "aravindh.k",
+			"email": "aravindhkathiresan02@gmail.com",
+			"password": "123456",
+			"countryCode": "+91",
+			"mobile": "9876543252",
+			"role": "admin"
+		},
+		{
+			"firstName": "Aravindh",
+			"lastName": "Aravindh",
+			"userName": "aravindh",
+			"email": "aravindh.k@greatinnovus.com",
+			"password": "123456",
+			"countryCode": "+91",
+			"mobile": "9876543242",
+			"role": "admin"
+		},
+		{
+			"firstName": "Staff",
+			"lastName": "Staff",
+			"userName": "staff",
+			"email": "staff@mail.com",
+			"password": "staff@12345",
+			"countryCode": "+91",
+			"mobile": "9876543254",
+			"role": "staff"
+		},
+		{
+			"firstName": "Kathir",
+			"lastName": "Pandian",
+			"userName": "kathir",
+			"email": "kathirpandian@arkinfotec.com",
+			"password": "12345678",
+			"countryCode": "+91",
+			"mobile": "9876543254",
+			"role": "staff"
+		},
+		{
+			"firstName": "Contractor",
+			"lastName": "Contractor",
+			"userName": "siva",
+			"email": "siva@mail.com",
+			"password": "12345678",
+			"countryCode": "+91",
+			"mobile": "9876543254",
+			"role": "contractor"
+		}
+	],
+	"ProjectCategories": [
+		{
+			"name": "Project Documentation",
+			"description": "Project Documentation",
+			"routeName": "ProjectDocumentation"
+		},
+		{
+			"name": "Work Monitoring Report",
+			"description": "Work Monitoring Report",
+			"routeName": "WorkMonitoringReport"
+		},
+		{
+			"name": "SOI & VO",
+			"description": "SOI & VO",
+			"routeName": "SOIVO"
+		},
+		{
+			"name": "Inspection Report",
+			"description": "Inspection Report",
+			"routeName": "InspectionReport"
+		},
+		{
+			"name": "TDS & MSDS",
+			"description": "TDS & MSDS",
+			"routeName": "TDSMSDS"
+		},
+		{
+			"name": "Claims",
+			"description": "Claims",
+			"routeName": "Claims"
+		},
+		{
+			"name": "Issues",
+			"description": "Issues",
+			"routeName": "IssueReport"
+		}
+	],
+	"Actions": [
+		{
+			"name": "Performance Bond",
+			"description": "Performance Bond",
+			"isMultiple": true
+		},
+		{
+			"name": "Insurance (Work Injury Compensation)",
+			"description": "Insurance (Work Injury Compensation)",
+			"isMultiple": true
+		},
+		{
+			"name": "Insurance (Contractor All Risk)",
+			"description": "Insurance (Contractor All Risk)",
+			"isMultiple": true
+		},
+		{
+			"name": "Risk Assessment",
+			"description": "Risk Assessment",
+			"isMultiple": true
+		},
+		{
+			"name": "PE Certificates",
+			"description": "PE Certificates",
+			"isMultiple": true
+		},
+		{
+			"name": "Worker List",
+			"description": "Worker List",
+			"isMultiple": true
+		},
+		{
+			"name": "Site Organization Chart",
+			"description": "Site Organization Chart",
+			"isMultiple": true
+		},
+		{
+			"name": "Detailed Contract Programme",
+			"description": "Detailed Contract Programme",
+			"isMultiple": true
+		},
+		{
+			"name": "Colour Schemes",
+			"description": "Colour Schemes",
+			"isMultiple": true
+		},
+		{
+			"name": "Pre-Con Survey Report",
+			"description": "Pre-Con Survey Report",
+			"isMultiple": true
+		},
+		{
+			"name": "Product Material Information(TDS/MSDS)",
+			"description": "Product Material Information(TDS/MSDS)",
+			"isMultiple": true
+		}
+	],
+	"Settings": [
+		{
+			"name": "appMaintenance",
+			"description": "Apex building surveyors is currently down for maintenance"
+		},
+		{
+			"name": "modifyPassword",
+			"description": "Modify the user password"
+		}
+	]
+}

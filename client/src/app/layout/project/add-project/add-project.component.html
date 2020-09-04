@@ -1,0 +1,172 @@
+<!-- <div class="main-section tabliedit col-md-12 p-0"> -->
+<div class="main-section col-md-12 p-0">
+    <div class='card'>
+        <div class="card-header pb-0 border-bottom row m-0">
+            <div class="col-md-4 p-0">
+                <h3 class="">Project
+                    <span class="" *ngIf='ProjectName'> : {{ProjectName}} </span>
+                </h3>
+            </div>
+            <div class="d-flex flex-row justify-content-end  mb-2 col-md-8 p-0">
+                <button class='btn btn-primary' (click)='listPath()'>Back</button>
+            </div>
+        </div>
+
+    <div class="card-body">
+            <tabset>
+                <!-- <div class='buttom-section text-right'>
+                    <button class='btn btn-default mr-2' (click)='listPath()'>cancel</button>
+    
+                </div> -->
+                <tab heading="Project" id="tab1">
+                    <div class='card-body'>
+                        <form role='form' [formGroup]='createProjectForm' class="common-form col-md-12 p-0">
+                            <div class="row">
+                                <div class='form-group col-md-6'>
+                                    <label>Project Title </label>
+                                    <input type='text' class='form-control' formControlName='title' placeholder="Enter Project Title" (keypress)='restrictSpace($event)' required>
+                                    <div class="required-text" *ngIf="submitted && f.title.errors && f.title.errors.required">
+                                        Project Title is required </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Location </label>
+                                    <input type='text' class='form-control' formControlName='location' placeholder="Enter Location" (keypress)='restrictSpace($event)' required>
+                                    <div class="required-text" *ngIf="submitted && f.location.errors && f.location.errors.required">
+                                        Location is required </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Assign Staff </label>
+                                    <angular2-multiselect [data]="staffDDList" [settings]="staffSettings" (onSelect)="onItemSelect($event)" 
+                                    (onDeSelectAll)="onDeSelectAll($event,'staff')" formControlName="staffDD"></angular2-multiselect>
+                                    <div class="required-text" *ngIf="submitted && f.staffDD.errors && f.staffDD.errors.required">
+                                        Staff must be required </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Assign Contractor </label>
+                                    <angular2-multiselect [data]="contractorDDList" [settings]="contractorSettings" (onSelect)="onItemSelect($event)"  
+                                    (onDeSelectAll)="onDeSelectAll($event,'contractor')" formControlName="contractorDD"></angular2-multiselect>
+                                    <div class="required-text" *ngIf="submitted && f.contractorDD.errors && f.contractorDD.errors.required">
+                                        Contractor must be required </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class='form-group col-md-6'>
+                                    <label>Description </label>
+                                    <textarea type='textArea' class='form-control' formControlName='description' placeholder="Enter Description" (keypress)='restrictSpace($event)' required></textarea>
+                                    <div class="required-text" *ngIf="submitted && f.description.errors && f.description.errors.required">Description is required
+                                    </div>
+                                </div>
+                                <div class='form-group col-md-6'>
+                                    <label>Address</label>
+                                    <textarea type='textArea' class='form-control' formControlName='address' placeholder="Enter Address" (keypress)='restrictSpace($event)' required></textarea>
+                                    <div class="required-text" *ngIf="submitted && f.address.errors && f.address.errors.required">
+                                        Address is required </div>
+                                </div>
+                            </div>
+                            <div class='form-group row m-0 '>
+                                <label>Upload Image</label>
+                                <div class="image-upload-sec multi-image-sec col-md-12">
+                                    <div class='row m-0 multi-box'>
+                                        <div *ngFor='let url of imagePreviewUrl let i=index' class="mt-2">
+                                            <div class="img-box">
+                                                <img [src]="url" width="130" height="130">
+                                                <button (click)="removeImage(i)" class="remove-img">
+                                            <i class="fa fa-window-close"></i>
+                                        </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label class="custom-file d-flex justify-content-center">
+                                <input type='file' class='form-control' (change)="fileProgress($event)" multiple
+                                    accept="image/*" required />
+                                <span class="file-custom btn btn-secondary">Upload Image</span>
+                            </label>
+                                </div>
+                                <div class="required-text" *ngIf="submitted && !(imagePreviewUrl.length > 0)">Image is required
+                                </div>
+                            </div>
+                        </form>
+                        <div class='buttom-section text-right'>
+                            <!-- <button class='btn btn-default mr-2' (click)='listPath()'>cancel</button> -->
+                            <button class='btn btn-primary' (click)='onSubmit()'>save</button>
+                        </div>
+                    </div>
+                </tab>
+
+                <tab heading="Project Documents">
+                    <!-- <a (click)="clickAble('active')"></a> -->
+                    <div *ngIf='!checkItCreated'>
+                        <h2 style="text-align: center !important;">ADD PROJECT</h2>
+                    </div>
+                    <div *ngIf='checkItCreated'>
+                        <app-project-documents-add *ngIf='!id' [PRODOC]="PRODOC" (Projects)="Demo()"></app-project-documents-add>
+                        <app-project-documents-add *ngIf='id' [PRODOCID]="PRODOCID" [PRODOC]="PRODOC" (Projects)="Demo()"></app-project-documents-add>
+
+                    </div>
+
+                </tab>
+                <tab heading="SOI VO">
+                    <div *ngIf='!checkItCreated'>
+                        <h2 style="text-align: center !important;">ADD PROJECT</h2>
+                    </div>
+                    <div *ngIf='checkItCreated'>
+                        <app-add-commondocument *ngIf='!id' [SOI]="SOI" (filevent)="Demo()"></app-add-commondocument>
+                        <app-add-commondocument *ngIf='id' [SOI]="SOI" [SOIId]="SOIId" (Projects)="Demo()"></app-add-commondocument>
+                    </div>
+                </tab>
+                <tab heading="TDS MSDS">
+                    <div *ngIf='!checkItCreated'>
+                        <h2 style="text-align: center !important;">ADD PROJECT</h2>
+                    </div>
+                    <div *ngIf='checkItCreated'>
+                        <app-add-commondocument *ngIf='!id' [TDS]="TDS" (Projects)="Demo()"></app-add-commondocument>
+                        <app-add-commondocument *ngIf='id' [TDS]="TDS" [TDSId]="TDSId" (Projects)="Demo()"></app-add-commondocument>
+                    </div>
+
+                </tab>
+                <tab heading="Claims">
+                    <div *ngIf='!checkItCreated'>
+                        <h2 style="text-align: center !important;">ADD PROJECT</h2>
+                    </div>
+                    <div *ngIf='checkItCreated'>
+                        <app-add-commondocument *ngIf='!id' [CLAIM]="CLAIM" (Projects)="Demo()"></app-add-commondocument>
+                        <app-add-commondocument *ngIf='id' [CLAIM]="CLAIM" [CLAIMID]="CLAIMID" (Projects)="Demo()"></app-add-commondocument>
+                    </div>
+                </tab>
+                <tab heading="Inspection">
+                    <div *ngIf='!checkItCreated'>
+                        <h2 style="text-align: center !important;">ADD PROJECT</h2>
+                    </div>
+                    <div *ngIf='checkItCreated'>
+                        <app-add-inspection *ngIf='id' [INSPEC]="INSPEC" [INSPECID]="INSPECID" (Projects)="Demo()"></app-add-inspection>
+                        <app-add-inspection *ngIf='!id' [INSPEC]="INSPEC" (Projects)="Demo()"></app-add-inspection>
+                    </div>
+                </tab>
+                <tab heading="Work Monitoring">
+                    <div *ngIf='!checkItCreated'>
+                        <h2 style="text-align: center !important;">ADD PROJECT</h2>
+                    </div>
+                    <div *ngIf='checkItCreated'>
+                        <app-addwork-monitoring *ngIf='!id' [WORK]="WORK" (Projects)="Demo()"></app-addwork-monitoring>
+                        <app-addwork-monitoring *ngIf='id' [WORK]="WORK" [WORKID]="WORKID" (Projects)="Demo()"></app-addwork-monitoring>
+                    </div>
+                </tab>
+                <tab heading="Issues">
+                    <div *ngIf='!checkItCreated'>
+                        <h2 style="text-align: center !important;">ADD PROJECT</h2>
+                    </div>
+                    <div *ngIf='checkItCreated'>
+                        <app-add-issues *ngIf='!id' [ISSUE]="ISSUE" (Projects)="Demo()"></app-add-issues>
+                        <app-add-issues *ngIf='id' [ISSUE]="ISSUE" [ISSUEID]="ISSUEID" (Projects)="Demo()"></app-add-issues>
+                    </div>
+                </tab>
+
+
+            </tabset>
+
+        </div>
+
+    </div>
+</div>

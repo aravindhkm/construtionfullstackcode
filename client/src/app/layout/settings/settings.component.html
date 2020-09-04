@@ -1,0 +1,49 @@
+
+<div class="main-section col-md-12 p-0">
+    <div class='card'>
+        <div class="card-header pb-0 border-bottom row m-0">
+            <div class="col-md-4 page-header pl-0">
+                <h3 class="">Settings Module</h3>
+            </div>
+         
+        </div>
+        <div class='card-body'>
+            <label class="pr-3">App Maintenance Status : </label>
+<ui-switch uncheckedLabel="In Active"
+checkedLabel="Active"
+size="large" (valueChange)="onValueChange($event)" [checked]="status"></ui-switch>
+
+            <form  class="common-form col-md-12 p-0" [formGroup]="authForm" (ngSubmit)="onLoggedin()">
+                <h4>Reset Password</h4>
+                <div>
+                    <div class="row">
+                    <div class="form-group col-md-6">
+                        <input autocomplete="nope"  formControlName="password" class="form-control" type="password" class="form-control input-underline input-lg" id="" placeholder="New Password"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required/>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">New Password is Required</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                      <input autocomplete="nope" formControlName="cpassword" class="form-control" type="password"  id="" placeholder=" Confirm Password"
+                      [ngClass]="{ 'is-invalid': submitted && f.cpassword.errors }" required/>
+                  <div *ngIf="submitted && f.cpassword.errors" class="invalid-feedback">
+                      <div *ngIf="f.cpassword.errors.required">Confirm Password is Required</div>
+                  </div>
+                  </div>
+                </div>
+                </div> 
+                <div class='bottom-section'>
+                    <button type="submit" class=" btn btn-primary float-left">Update Password</button> 
+                    <button class='btn btn-default mr-2 float-right'
+                            (click)='listPath()'><i class="fa fa-long-arrow-left mr-2"></i>back</button>               
+                </div> 
+                
+                </form>
+                
+</div>
+    </div>
+</div>       
+

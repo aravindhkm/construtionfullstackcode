@@ -1,0 +1,36 @@
+
+<div class="d-flex align-items-center auth px-0 login-page">
+    <div class="row w-100 mx-0">
+      <div class="col-lg-4 ml-md-5 pl-md-5">
+        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+          <div class="brand-logo mb-3">
+          <!-- <h3 class="fontcolor text-center">Construction Web</h3> -->
+          <a><img src="assets/images/apex-logo2.png"></a>
+          </div>
+          <h6 class="font-weight-light text-center">Sign in</h6>
+          <form class="pt-4 common-form" [formGroup]="authForm" (ngSubmit)="onLoggedin()">
+              <div class="form-content">
+                  <div class="form-group">
+                      <input formControlName="email" autocomplete="nope" type="text" ng-model="name" class="form-control input-underline input-lg" id="" placeholder="Email"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required/>  
+                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                          <div *ngIf="f.email.errors.required">Email is Required</div>
+                          <div *ngIf="f.email.errors.email">Invalid Email</div>
+                      </div></div>
+                  <div class="form-group">
+                      <input autocomplete="nope" formControlName="password" class="form-control" placeholder="Password" type="password" class="form-control input-underline input-lg" id="" placeholder="Password"
+                      [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required/>
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Password is Required</div>
+                  </div>
+                  </div>
+              </div> 
+              <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>          
+            <div class="text-center mt-4 font-weight-light">
+              <a routerLink="/forgotpassword" class="text-primary">Forgot Password?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>   
+  

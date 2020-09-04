@@ -1,0 +1,84 @@
+<div class="main-section col-md-12 p-0">
+    <div class='card'>
+        <div class="card-header py-0 border-bottom row m-0">
+            <div class="col-md-4 page-header pl-0">
+                <h4 *ngIf='projectId' class=""> Inspection Report</h4>
+            </div>
+            <div class="d-flex flex-row justify-content-end align-items-center col-md-8 pr-0">
+                <button class="btn btn-primary" *ngIf="imageData.length > 0 && imageData[0].imageId" (click)="onExportParent()"><i class="fa fa-arrow-down"></i>Export </button>
+            </div>
+        </div>
+        <div class='card-body'>
+            <form class="common-form col-md-12">
+
+                <div class="work-monitor-section">
+                    <!-- <h4 class="sub-header">Project title : <span>{{projectTitle}}</span> </h4> -->
+                    <br>
+                    <div class="row">
+                        <div *ngFor="let data of imageData; let i = index" class='form-group col-md-4'>
+                            <div class="image-upload-sec text-left">
+                                <div class="upload-block pl-0">
+                                    <div class="img-box">
+                                        <span *ngIf="!data.imagePreview" class="previ-section"> <i
+                                                class="fa fa-file-image-o icon-lg"></i></span>
+                                        <span *ngIf="data.imagePreview">
+                                            <img [src]="data.imagePreview" width="180" height="200"
+                                                (click)="onImageClick(i)">
+                                        </span>
+
+                                    </div>
+                                    <div class="row m-0">
+                                        <div *ngIf="data.imagePreview" class="form-group check-box-sec col-md-6 p-0 mt-3">
+
+                                            <label class="mr-2 pt-0">
+                                                {{data.textField}}
+                                            </label>
+                                            <input type="checkbox" class="align-middle" [checked]='data.isParentChecked' (click)="onCheckBoxChange(data,i)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="inspectionPointsData.length > 0" class="table-module-sec">
+                        <div class="row m-0 card-header px-0">
+                            <div class="col-md-4 pl-0">
+                                <h3>{{blockTitle}}</h3>
+                            </div>
+                            <div class="d-flex flex-row justify-content-end align-items-center col-md-8 pr-0">
+                                <button class="btn btn-primary" (click)="onExportChild(inspectionPointsData)"><i
+                                        class="fa fa-arrow-down"></i>Export </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="xs-sec text-center">Point No.</th>
+                                        <th> Description</th>
+                                        <th class="sm-sec text-center"> Images</th>
+                                        <th class="sm-sec text-center"> Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let imagePointData of inspectionPointsData;let subi=index;">
+                                        <td class="text-center"> {{subi + 1}}</td>
+                                        <td>{{imagePointData.description}}</td>
+                                        <td class="text-center"><img [src]="imagePointData.imageUrl+imagePointData.defectPath+imagePointData.defectImage" lightbox [simpleMode]="true" /></td>
+                                        <td class="text-center">{{imagePointData.status}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class='buttom-section text-right'>
+                <!-- <button class='btn btn-default mr-2' (click)='listPath()'><i class="fa fa-long-arrow-left mr-2"></i>Back</button> -->
+                <!-- <button class='btn btn-primary'
+                        (click)='onSubmit()'>save</button> -->
+            </div>
+        </div>
+    </div>
+</div>

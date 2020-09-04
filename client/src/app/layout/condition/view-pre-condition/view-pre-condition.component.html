@@ -1,0 +1,95 @@
+<div class="main-section col-md-12 p-0">
+    <div class='card'>
+        <div class="card-header pb-0 border-bottom row m-0">
+            <div class="col-md-4 page-header pl-0">
+                <h3 class="">View Pre condition Survey</h3>
+            </div>
+            <div class="d-flex flex-row justify-content-end align-items-center col-md-8 pr-0">
+                <button *ngIf="imageData.length > 0 && imageData[0].imageId" class="btn btn-primary" (click)="exportParent()"><i class="fa fa-arrow-down"></i>Export </button>
+            </div>
+        </div>
+        <div class='card-body'>
+            <form role='form'
+                  class="common-form col-md-12">
+                <div class="upload-section file-upload-section ">
+                    <h5 *ngIf="projectName">Project Name : {{projectName}} </h5>
+                    <div class="row">
+                        <div *ngFor="let data of imageData; let i = index"
+                             class='form-group col-md-4'>
+                            <div class="image-upload-sec text-left">
+                                <div class="upload-block pl-0">
+                                    <div class="img-box">
+                                        <span *ngIf="!data.imagePreview"
+                                              class="previ-section"> <i class="fa fa-file-image-o icon-lg"></i></span>
+                                        <span *ngIf="data.imagePreview"><img [src]="data.imagePreview"
+                                                 width="180"
+                                                 height="200"
+                                                 (click)="onImgClick(data.imageId,i)">
+                                        </span>
+                                    </div>
+                                    <div class="row m-0">
+                                        <div class="form-group check-box-sec col-md-6 p-0 mt-3">
+
+                                            <label class="mr-2 pt-0">
+                                                {{data.title ? data.title : ' - '}}
+                                            </label>
+                                            <input type="checkbox"
+                                                   class="align-middle"
+                                                   [checked]="data.isParentChecked" 
+                                                   (click)="onParentCheckBoxChange(data,i)"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-monitor-section">
+                    <div class="row block-monitor m-0">
+                    </div>
+                    <div class="drop-accord-sec">
+                        <div class="row">
+                            <div class="col-md-4 pl-0">
+                                <h3 *ngIf="monitorName">Survey name : {{monitorName}}</h3>
+                            </div>
+                            <div class="d-flex flex-row justify-content-end align-items-center col-md-8 pr-0">
+                                <button *ngIf="monitorDatas.length > 0" class="btn btn-primary" (click)="exportChild()" ><i class="fa fa-arrow-down"></i>Export </button>
+                            </div>
+                        </div>                        
+                        <ngb-accordion [closeOthers]="false"
+                                       activeIds="static-3"
+                                       class="accordion">
+                            <div *ngFor="let data of monitorDatas; let i = index">                                
+                                <ngb-panel id={{i}}
+                                           class="col-md-4"> 
+                                    <ng-template ngbPanelTitle>
+                                        <div class="acc-checkbox"><input type="checkbox" [checked]="data.isChildChecked" (click)="onChildCheckBoxChange(data,i)"/></div>
+                                        <label>
+                                            <h6 class="mb-0">
+                                                {{data.parentName}}
+                                            </h6>
+                                        </label>
+                                    </ng-template>
+                                    <ng-template ngbPanelContent>
+                                            <div>
+                                                <img width="50"
+                                                     height="50"
+                                                     lightbox [simpleMode]="true"
+                                                     src="{{imgUrl}}{{data.imagePath}}{{data.imageName}}"
+                                                     alt="No Image" />
+                                            </div>
+                                    </ng-template>
+                                </ngb-panel>
+                            </div>
+                        </ngb-accordion>
+                        <div *ngIf="monitorDatas.length < 1 && onClick">No Data Found  </div>
+                    </div>
+                </div>
+            </form>
+            <div class='bottom-section text-right'>
+                <button class='btn btn-default mr-2'
+                        (click)='listPath()'><i class="fa fa-long-arrow-left mr-2"></i>back</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,281 @@
+<div class="main-section col-md-12 p-0">
+    <div class='card'>
+        <div class="card-header py-0">
+            <h4 *ngIf="projectDocumentsTitle == 'soi' && !id" class="border-bottom"> SOI & VO Documents</h4>
+            <h4 *ngIf="projectDocumentsTitle == 'soi' && id" class="border-bottom"> SOI & VO Documents</h4>
+            <h4 *ngIf="projectDocumentsTitle == 'tds' && !id" class="border-bottom"> TDS & MSDS Documents</h4>
+            <h4 *ngIf="projectDocumentsTitle == 'tds' && id" class="border-bottom"> TDS & MSDS Documents</h4>
+            <h4 *ngIf="projectDocumentsTitle == 'claims' && !id" class="border-bottom"> Claims Documents</h4>
+            <h4 *ngIf="projectDocumentsTitle == 'claims' && id" class="border-bottom"> Claims Documents</h4>
+        </div>
+        <div class='card-body'>
+            <form role='form' [formGroup]='createDocumentForm' class="common-form col-md-12">
+                <div class='form-group col-md-6 p-0'>
+                    <!-- <h5>Project Name </h5>
+                    <input type='text' class="form-control" formControlName="projectData" /> -->
+                    <!-- <angular2-multiselect [data]="projectLists" [settings]="dropdownSettings" (onDeSelectAll)="onItemSelect($event,true)" (onSelect)="onItemSelect($event,false)" formControlName="projectData"></angular2-multiselect>
+                    <div class="required-text" *ngIf="submitted && f.projectData.errors && f.projectData.errors.required">
+                        Project is required </div> -->
+                </div>
+                <!-- <div *ngIf="!this.id" class='form-group col-md-6 p-0'>
+                    <h5>Projects List </h5>
+                    <angular2-multiselect [data]="projectLists" [settings]="dropdownSettings" (onDeSelectAll)="onItemSelect($event,true)" (onSelect)="onItemSelect($event,false)" formControlName="projectData"></angular2-multiselect>
+                    <div class="required-text" *ngIf="submitted && f.projectData.errors && f.projectData.errors.required">
+                        Project is required </div>
+                </div>
+                <div *ngIf="this.id" class='form-group col-md-6 p-0'>
+                    <h5>Projects List </h5>
+                    <angular2-multiselect [data]="projectLists" [settings]="dropdownSettingsEdit" (onDeSelectAll)="onItemSelect($event,true)" (onSelect)="onItemSelect($event,false)" formControlName="projectData"></angular2-multiselect>
+
+                </div> -->
+
+                <!-- soi documents & mds -->
+
+                <div *ngIf="projectDocumentsTitle == 'soi'" class="file-upload-section">
+                    <h5> Please Upload the SOI Files</h5>
+                    <div *ngFor="let data of names; let i = index" activeIds="static-1" class="upload-section">
+                        <div id="i" class="row document-upload-sec m-0">
+                            <div class="col-md-4 p-0 doc-title">
+                                <div class="section-title">
+                                    <h6 *ngIf="i == 0">Title</h6>
+                                </div>
+                                <div *ngFor="let subtitle of data;let subIndex=index">
+                                    <div class="file-name-doc mb-3">
+                                        
+                                    <label class="mb-0 text-left">
+                                        {{subtitle.name}}
+                                    </label>
+                                </div>
+                               <div *ngIf="subtitle.flag"><br/></div> 
+                                </div>
+                            </div>
+                            <div class="col-md-8 doc-upload-file">
+                                <div class="section-title">
+                                    <h6 *ngIf="i == 0">File</h6>
+                                </div>
+                                <div *ngFor="let subdata of record; let subi = index">
+                                    <!-- remove button -->
+                                    <div *ngIf="i > 0 && i == subi" class="remove-field"><button (click)="removeField(subi,subdata,'soi')" type='button' class="btn btn-warning">Remove</button></div>
+                                    <div *ngFor="let singledata of subdata; let objId = index">
+                                        <div>
+                                            <div *ngIf="i == subi" class="doc-upload-box clearfix">
+
+
+                                                <!-- <label *ngIf="i == subi" class="custom-file"> -->
+                                                    <label class="custom-file" *ngIf="objId == 3">
+                                                        <input *ngIf="objId == 3" type='text' value={{singledata.remarks}} class="form-control form-text" (change)='productNameChange($event,subi,objId,"soi")'  />
+                                                    </label>
+                                                    <label *ngIf="i == subi && 3 > objId" class="custom-file">
+
+                                                <input *ngIf="i == subi" type="file"
+                                                    (change)="uploadDocument(i,objId,$event,singledata,'soi')"
+                                                    class="upload-file-form"
+                                                    multiple
+                                                    accept=".xlsx,.xls,.doc,.docx,.ppt, .pptx,.txt,.pdf,.csv" />
+                                                    <input type="hidden" name="fileHidden" formControlName='file'/>
+
+                                                <span *ngIf=" i == subi"
+                                                    (change)="uploadDocument(i,objId,$event,singledata)"
+                                                    class="file-custom btn btn-primary"
+                                                    multiple
+                                                    accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf,.csv">Upload
+                                                    File</span>
+                                            </label>
+                                            <div class="file-namescroll">  
+                                            <perfect-scrollbar style="max-height: 200px;" [config]="{useBothWheelAxes: true, suppressScrollX: false, suppressScrollY: false}">
+
+                                                <div *ngFor='let labelData of singledata.fileName;let labelIndex=index' class="document-filename">
+                                                <label *ngIf=" i == subi" class="doc-file-name"><span>{{labelData}}</span></label> <button class="icon icon-close mr-1" (click)='onEachFileRemove(i,objId,labelIndex,singledata.documentId,"soi")'><i class="fa fa-times-circle"></i></button>                                                
+                                            </div>
+                                            </perfect-scrollbar>
+                                            </div>
+
+                                                <div *ngIf=" i == subi" class="doc-btn">
+                                                    <!-- <button *ngIf="singledata.fileName" type='button'
+                                                    (click)="removeFiles(i,objId,'soi')" class="icon icon-close mr-1"
+                                                    placement="bottom" ngbTooltip="Cancel"><i
+                                                        class="fa fa-times-circle"></i></button> -->
+                                                    <a *ngIf="singledata.fileName.length > 0 && !singledata.file" class="icon download-sec" href="{{singledata.baseUrl+'documents/download?mapId='+singledata.documentId}}" target="_blank" placement="bottom" ngbTooltip="Download"><i class="fa fa-download"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>
+                                        <span class="upload-date" *ngIf="singledata.uploadTime && singledata.fileName.length > 0 && i == subi">{{singledata.uploadTime ? singledata.uploadTime : '' }}</span>
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button (click)="AddAnotherField('soi')" type='button' class="btn btn-secondary">Add Field</button>
+                </div>
+
+                <!-- TDS  documents -->
+
+                <div *ngIf="projectDocumentsTitle == 'tds'" class="file-upload-section">
+                    <h4> Please Upload the Following Files</h4>
+                    <div *ngFor="let data of tdsTitle; let i = index" activeIds="static-1" class="upload-section">
+                        <div id="i" class="row document-upload-sec m-0">
+                            <div class="col-md-4 p-0 doc-title">
+                                <div class="section-title">
+                                    <h6 *ngIf="i == 0">Title</h6>
+                                </div>
+                                <div *ngFor="let subtitle of data;let subIndex=index">
+                                    <div class="file-name-doc mb-3">
+                                        
+                                    <label class="mb-0 text-left">
+                                        {{subtitle.name}}
+                                    </label>
+                                </div>
+                               <div *ngIf="subtitle.flag"><br/></div> 
+                                </div>
+                            </div>
+                            <div class="col-md-8 doc-upload-file">
+                                <div class="section-title">
+                                    <h6 *ngIf="i == 0">File</h6>
+                                </div>
+                                <div *ngFor="let subdata of tdsRecord; let subi = index">
+
+                                    <div *ngIf="i > 0 && i == subi" class="remove-field"><button type='button' (click)="removeTdsFields(subi,subdata,'tds')" class="btn btn-warning">Remove</button></div>
+                                    <div *ngFor="let singledata of subdata; let objId = index">
+                                        <div>
+                                            <div *ngIf="i == subi" class="doc-upload-box clearfix">
+
+                                                <label class="custom-file" *ngIf="objId ==0">
+                                        <input *ngIf="objId == 0" type='text' value={{singledata.productName}} placeholder={{singledata.placeHolder}} class="form-control form-text" (change)='productNameChange($event,subi,objId,"tds")'  /></label>
+                                                <label *ngIf="i == subi && objId > 0" class="custom-file">
+                                                <input *ngIf="i == subi && objId > 0" type="file"
+                                                    (change)="uploadDocument(i,objId,$event,singledata,'tds')"
+                                                    class="upload-file-form"
+                                                    multiple
+                                                    accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf,.csv" />
+                                                    <input type="hidden" name="fileHidden" formControlName='file'/>
+
+                                                <span *ngIf=" i == subi && objId > 0"
+                                                    (change)="uploadDocument(i,objId,$event,singledata,'tds')"
+                                                    class="file-custom btn btn-primary"
+                                                    multiple
+                                                    accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf,.csv">Upload
+                                                    File</span>
+
+
+
+                                            </label>
+                                                <!-- <label *ngIf=" i == subi && objId > 0"
+                                                class="doc-file-name">{{ singledata.fileName ? singledata.fileName : singledata.placeHolder }}
+                                            </label> -->
+                                                <div class="file-namescroll">
+                                            <perfect-scrollbar style="max-height: 200px;" [config]="{useBothWheelAxes: true, suppressScrollX: false, suppressScrollY: false}">
+
+                                                    <div *ngFor='let labelData of singledata.fileName;let labelIndex=index' class="document-filename">
+                                                        <label *ngIf=" i == subi" class="doc-file-name"><span>{{labelData}}</span> <button class="icon icon-close mr-1" (click)='onEachFileRemove(i,objId,labelIndex,singledata.documentId,"tds")'><i class="fa fa-times-circle"></i></button>
+                                                    <!-- {{singledata.filePathLabel ? singledata.filePathLabel : singledata.placeHolder ? singledata.placeHolder : 'please upload' }} -->
+                                                </label>
+                                                    </div>
+                                                    </perfect-scrollbar>
+                                                </div>
+                                                <div *ngIf=" i == subi && objId > 0" class="doc-btn">
+                                                    <!-- <button *ngIf="singledata.fileName" type='button'
+                                                    (click)="removeFiles(i,objId,'tds')" class="icon icon-close mr-1"
+                                                     placement="bottom" ngbTooltip="Cancel"><i
+                                                        class="fa fa-times-circle"></i></button> -->
+                                                    <a *ngIf="singledata.fileName.length > 0 && !singledata.file && objId > 0" class="icon download-sec" href="{{singledata.baseUrl+'documents/download?mapId='+singledata.documentId}}" target="_blank" placement="bottom" ngbTooltip="Download"><i class="fa fa-download"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="upload-date" *ngIf="singledata.uploadTime && singledata.fileName.length > 0 && i == subi">{{singledata.uploadTime ? singledata.uploadTime : '' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button (click)="AddAnotherField('tds')" type='button' class="btn btn-secondary">Add Field</button>
+                </div>
+
+                <!-- claims documents -->
+
+                <div *ngIf="projectDocumentsTitle == 'claims'" class="folder-box file-upload-section">
+                    <h4>Please Upload the Following Files</h4>
+                    <div *ngFor="let data of claimsTitle; let i = index" activeIds="static-1" class="upload-section">
+                        <div id="i" class="row document-upload-sec m-0">
+                            <div class="col-md-4 p-0 doc-title">
+                                <div class="section-title">
+                                    <h6 *ngIf="i == 0">Title</h6>
+                                </div>
+                                <div *ngFor="let subtitle of data;let subIndex=index">
+                                    <div class="file-name-doc mb-3">
+                                        
+                                    <label class="mb-0 text-left">
+                                        {{subtitle.name}}
+                                    </label>
+                                </div>
+                               <div *ngIf="subtitle.flag"><br/></div> 
+                                </div>
+                            </div>
+                            <div class="col-md-8 doc-upload-file">
+                                <div class="section-title">
+                                    <h6 *ngIf="i == 0">File</h6>
+                                </div>
+                                <div *ngFor="let subdata of claimsRecord; let subi = index">
+                                    <div *ngIf="i > 0 && i == subi" class="remove-field">
+                                        <button type='button' (click)="removeTdsFields(i,subdata,'claims')" class="btn btn-warning">Remove</button></div>
+
+                                    <div *ngFor="let singledata of subdata; let objId = index">
+                                        <div>
+                                            <div *ngIf="i == subi" class="doc-upload-box clearfix">
+
+
+                                                <label *ngIf="i == subi" class="custom-file">
+                                                <input *ngIf=" i == subi" type="file"
+                                                    (change)="uploadDocument(i,objId,$event,singledata,'schedule')"
+                                                    class="upload-file-form"
+                                                    multiple
+                                                    accept=".xlsx,.xls,.doc,.docx,.ppt, .pptx,.txt,.pdf,.csv" />
+                                                    <input type="hidden" name="fileHidden" formControlName='file'/>
+                                                <span *ngIf=" i == subi"
+                                                    (change)="uploadDocument(i,objId,$event,singledata,'schedule')"
+                                                    class="file-custom btn btn-primary"
+                                                    multiple
+                                                    accept=".xlsx,.xls,.doc,.docx,.ppt, .pptx,.txt,.pdf,.csv">Upload
+                                                    File</span>
+
+                                            </label>
+                                                <div class="file-namescroll">
+                                            <perfect-scrollbar style="max-height: 200px;" [config]="{useBothWheelAxes: true, suppressScrollX: false, suppressScrollY: false}">
+
+                                                    <div *ngFor='let labelData of singledata.fileName;let labelIndex=index' class="document-filename">
+                                                        <label *ngIf=" i == subi" class="doc-file-name"><span>{{labelData}}</span> <button class="icon icon-close mr-1" (click)='onEachFileRemove(i,objId,labelIndex,singledata.documentId,"claims")'><i class="fa fa-times-circle"></i></button>
+                                                </label>
+                                                    </div>
+                                                    </perfect-scrollbar>
+                                                </div>
+                                                <div *ngIf=" i == subi" class="doc-btn">
+                                                    <!-- <button *ngIf="singledata.fileName" type='button'
+                                                    (click)="removeFiles(i,objId,'claims')"
+                                                    class="icon icon-close mr-1" placement="bottom" ngbTooltip="Cancel"><i
+                                                        class="fa fa-times-circle"></i></button> -->
+                                                    <a *ngIf="singledata.fileName.length > 0 && !singledata.file" class="icon download-sec" href="{{singledata.baseUrl+'documents/download?mapId='+singledata.documentId}}" target="_blank" placement="bottom" ngbTooltip="Download"><i class="fa fa-download"></i></a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <p class="upload-date" *ngIf="singledata.uploadTime && singledata.fileName.length  > 0 && i == subi">{{singledata.uploadTime ? singledata.uploadTime : '' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button (click)="AddAnotherField('claims')" type='button' class="btn btn-secondary">Add Field</button>
+                </div>
+
+            </form>
+            <div class='bottom-section text-right'>
+                <button class='btn btn-primary' (click)='onSubmit()' type='button'>save</button>
+            </div>
+        </div>
+    </div>
+</div>

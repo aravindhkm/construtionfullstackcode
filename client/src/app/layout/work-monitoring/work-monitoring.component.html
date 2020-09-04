@@ -1,0 +1,59 @@
+<div class="row m-0 common-page stretch-card">
+  <div class="main-section col-md-12 p-0">
+    <div class="card">
+      <div class="card-header row m-0">
+        <div class="col-md-4 page-header">
+            <h3 class="page-title pr-0">Work Monitoring List</h3></div>
+        <div class="d-flex flex-row justify-content-end align-items-center col-md-8 pl-0">
+          <form #searchForm='ngForm' (ngSubmit)='submit(searchForm.value)' class="common-form">
+              <div class="form-group mr-2 mt-3">
+                  <div class="input-group">
+                      <input class="form-control" type='text' [(ngModel)]='search' name='search'  placeholder="search">
+                      <button class="input-group-addon icon-prim" type='submit'>
+                      <i class="fa fa-search"></i>
+                      </button>
+                  </div>
+              </div>
+          </form>  
+            <button class='btn btn-primary mr-2 reset-icon' type='button' (click)='onReset()'><i class="fa fa-refresh m-0"></i></button>
+            <!-- <button class="btn btn-primary" (click)="create()"><i class="fa fa-plus"></i>Add Work Monitoring</button> -->
+        </div>
+      </div>
+      <div class="card-body pt-0">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="xs-sec text-center">S.No</th>
+                  <th> Project Title</th>
+                  <th class="mm-sec"> Project Monitors</th>
+                  <th class="sm-sec text-center"> Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf='workMonitoringDatas.length != 0'> 
+              <tr *ngFor='let i=index let data of workMonitoringDatas  | paginate:{itemsPerPage: itemsPerPage, currentPage: page,totalItems:collection}'>
+                <td class="text-center">{{(page - 1) * itemsPerPage + i + 1}}</td>
+                <td>{{data.title}}</td>  
+                <td>{{data.monitors.length}}</td>                  
+            <td class="action-box text-center">
+                <button class="icon icon-edit" (click)='viewPath(data.id)' placement="bottom" ngbTooltip="View"> 
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button class="icon icon-dele" (click)='delete(data.id)' placement="bottom" ngbTooltip="Delete"> 
+                  <i class="fa fa-trash-o"></i>
+                </button>
+            </td>
+          </tr>                 
+            </tbody>
+            <tbody *ngIf='workMonitoringDatas.length == 0'>
+              <tr> <td colspan="6" class="font-weight-medium text-center">No Data Found</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='ml-auto mt-3'>
+    <pagination-controls  (pageChange)="onChange($event)" previousLabel="" nextLabel=""> </pagination-controls>
+</div>
+    </div>

@@ -1,0 +1,74 @@
+<div class="main-section col-md-12 p-0">
+    <div class='card '>
+        <div class="card-header border-bottom row m-0 pb-0">
+            <div class="col-md-4" *ngIf='this.isDropPage'>
+            <h3 
+                class="">Create Work Monitor</h3>
+            <!-- <h3 *ngIf='id'
+                class="">Edit Drop Monitor</h3> -->
+            </div>
+            <div class="col-md-4" *ngIf='!this.isDropPage'>
+                <!-- <h3 *ngIf='!id'
+                    class="">Create Drop Monitor</h3> -->
+                <h3 
+                    class="">Create Work Monitor</h3>
+                </div>
+                <!-- <div class="col-md-8">
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="#">Block-1</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Drop</li>
+                        </ol>
+                      </nav>
+                </div> -->
+        </div>
+        <div class='card-body'>
+            <div class="breadcrumb-section col-md-12">
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ol class="breadcrumb">
+                    <!-- <li class="breadcrumb-item"><a href="#">Block-1</a></li> -->
+                    <li class="breadcrumb-item active" aria-current="page">Block</li>
+                    </ol>
+                    </nav>
+            </div>
+            
+            <form role='form'
+                  [formGroup]='createDropMonitorForm'
+                  class="common-form col-md-6">
+                   <div class="monitor-banner"> <img width="150" height="150" src="{{this.imagePath}}" alt="No Image"/></div>        
+                   <div class="button-prev">
+                       <!-- <button class="btn-lg btn-outline-primary">Drop</button> -->
+                   </div>                    
+                    <div *ngFor="let data of dropData; let i = index" class='form-group mt-4'>
+                      <div class="input-group">
+                        <input [ngClass]="[ this.submission && (!data.textField || !data.isSave)  ? 'form-control has-error' : 'form-control']" placeholder="Enter Name" value="{{ data.textField}}" (change)="this.onTextChange($event,i)" >   
+                        <!-- <label *ngIf="this.submission && (!data.textField || !data.isSave)">Please Submit here</label>                      -->
+                        <button (click)="this.onButtonClick($event,data)"><i class="fa fa-forward" aria-hidden="true"></i>
+                        </button>
+
+
+                        <button class="btn-icon btn-outline-primary ml-2"                                        
+                        (click)="this.onSubmit($event,i)"><i class="fa fa-check"></i></button> 
+                        <!-- <button (click)="this.onButtonClick($event,data)">Click Here</button> -->
+                        <button *ngIf="i > 0" class="btn-icon btn-outline-danger ml-2"
+                            (click)="this.removeField($event,i)"><i class="fa fa-close"></i></button>
+                      </div>                                              
+                    </div>  
+                    <button class="btn btn-primary" (click)="this.addField($event)">Add Field</button>
+          
+            </form>
+            <div class='bottom-section text-right'>
+                <button class='btn btn-default mr-2'
+                        (click)='listPath()'>back</button>
+                <!-- <button class='btn btn-primary'
+                        (click)='onSubmit($event)'>save</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 
+    
+ -->
